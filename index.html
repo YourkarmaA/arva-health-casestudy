@@ -1,0 +1,566 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);font-size:15px;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:26px;font-weight:500;margin-bottom:.25rem}
+.subtitle{color:var(--color-text-secondary);font-size:14px;margin-bottom:2rem}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-right:6px;margin-bottom:6px}
+.badge-pink{background:#FBEAF0;color:#72243E}
+.badge-teal{background:#E1F5EE;color:#085041}
+.badge-amber{background:#FAEEDA;color:#633806}
+.badge-blue{background:#E6F1FB;color:#0C447C}
+.badge-coral{background:#FAECE7;color:#712B13}
+.section{margin-bottom:2.5rem}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.section-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.08em;text-transform:uppercase}
+.section-title{font-size:18px;font-weight:500}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem}
+.card-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em}
+.card-body{font-size:14px;color:var(--color-text-primary);line-height:1.65}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.highlight{background:var(--color-background-secondary);border-left:3px solid #D4537E;border-radius:0;padding:.75rem 1rem;margin:.75rem 0;font-size:14px}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.75rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;text-align:center}
+.metric-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.funnel-stage{border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.5rem;border:0.5px solid var(--color-border-tertiary)}
+.tof{background:#E6F1FB;border-color:#B5D4F4}
+.tof .stage-label{color:#0C447C}
+.mof{background:#E1F5EE;border-color:#9FE1CB}
+.mof .stage-label{color:#085041}
+.bof{background:#FBEAF0;border-color:#F4C0D1}
+.bof .stage-label{color:#72243E}
+.stage-label{font-size:12px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.35rem}
+.stage-body{font-size:14px;color:var(--color-text-primary)}
+.tag-row{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:4px}
+.angle-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.6rem .9rem;margin-bottom:.4rem;font-size:14px}
+.angle-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);margin-right:6px}
+.problem{border-left:3px solid #E24B4A;padding:.6rem .9rem;margin-bottom:.5rem;font-size:14px;background:var(--color-background-secondary)}
+.solution{border-left:3px solid #1D9E75;padding:.6rem .9rem;margin-bottom:.5rem;font-size:14px;background:var(--color-background-secondary)}
+.exp-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem}
+.exp-num{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+.exp-title{font-size:15px;font-weight:500;margin-bottom:.5rem}
+.exp-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.75rem}
+.exp-col{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.5rem .75rem;font-size:13px}
+.exp-col-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.75rem}
+.before{background:#FCEBEB;border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.after{background:#EAF3DE;border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.ba-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.before .ba-label{color:#A32D2D}
+.after .ba-label{color:#3B6D11}
+.ba-item{font-size:13px;margin-bottom:.2rem}
+.budget-bar{display:flex;height:28px;border-radius:20px;overflow:hidden;margin:.75rem 0}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:2rem 0}
+.bonus{background:linear-gradient(0deg,#FBEAF0,#E6F1FB);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem}
+.bonus-title{font-size:16px;font-weight:500;margin-bottom:.75rem}
+.bonus-item{font-size:14px;margin-bottom:.6rem;padding-left:1rem;position:relative}
+.bonus-item:before{content:"→";position:absolute;left:0;color:#D4537E}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:.5rem}
+th{text-align:left;font-weight:500;color:var(--color-text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:.4rem .6rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+td{padding:.5rem .6rem;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+tr:last-child td{border-bottom:none}
+@media(max-width:620px){.grid2,.grid3,.metric-row,.exp-row,.before-after{grid-template-columns:1fr}.bonus{padding:1rem}}
+</style>
+
+<div class="wrap">
+
+<h2 class="sr-only">Arva Health Performance Marketing Case Study — Full Strategic Breakdown</h2>
+
+<h1>Arva Health — Performance Marketing Case Study</h1>
+<p class="subtitle">Managing ₹5–10L/month | Meta Ads + Google Ads | India Urban FemTech</p>
+<div>
+  <span class="badge badge-pink">FemTech</span>
+  <span class="badge badge-teal">D2C Healthcare</span>
+  <span class="badge badge-blue">Fertility Tests</span>
+  <span class="badge badge-amber">Egg Freezing</span>
+  <span class="badge badge-coral">IVF</span>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">Brand & Audience Breakdown</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Primary Persona — "The Planner"</div>
+      <div class="card-body">Urban professional, 27–33, Bengaluru/Mumbai/Delhi. Works in tech, consulting, or finance. Has deferred marriage/kids deliberately. Googles "AMH levels age 30" at 11pm. Health-literate but fertility-illiterate. Worries she waited too long but won't say it out loud.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Secondary Persona — "The Anxious TTC-er"</div>
+      <div class="card-body">29–35, married 1–2 years, trying to conceive for 3–8 months with no result. Already been told "just relax" by one doctor. Feels dismissed. Wants data, not platitudes. Household income ₹15L+. Will spend money to get answers.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Tertiary Persona — "The Optimizer"</div>
+      <div class="card-body">25–29, not thinking about kids yet but curious about her body. Follows health creators, tracks macros, owns a Garmin/Apple Watch. Fertility is just another metric to her. Low urgency but high curiosity. Converts on low-ticket (₹2,200 AMH test) first.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Awareness Breakdown</div>
+      <div class="card-body">
+        <strong>~15%</strong> — Solution-aware (knows fertility tests exist)<br>
+        <strong>~35%</strong> — Problem-aware (knows her clock is ticking)<br>
+        <strong>~50%</strong> — Unaware (has PCOS, irregular cycles but hasn't connected to fertility impact)<br><br>
+        <em>Most ads target the 15%. The real opportunity is the 50%.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">Real pain points that convert: (1) "What if I waited too long?" (2) "My doctor brushed me off" (3) "I don't want IVF to be my only option" (4) "No one in my family talks about this" (5) Career vs. family guilt. These aren't demographics — they're buying triggers.</div>
+
+  <div class="card">
+    <div class="card-title">Audience Targeting Logic — Meta</div>
+    <div class="card-body">
+      <strong>Interests:</strong> Women's health, PCOS, prenatal health, Clue/Flo app users, fertility, hormone health, Mira fertility tracker<br>
+      <strong>Behavioral:</strong> Online health purchasers, engaged shoppers, new job (stress trigger), recently engaged/married<br>
+      <strong>Lookalikes:</strong> 1–3% LAL from purchasers + consultation bookers (build separate LALs — buyer intent differs)<br>
+      <strong>Broad:</strong> Women 25–35, Tier-1 cities — let Meta's algo optimize after 50+ conversions/week
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">Funnel Design</span>
+  </div>
+
+  <div class="funnel-stage tof">
+    <div class="stage-label">TOF — Cold Traffic | Budget: 40% | Platform: Meta 70%, Google Display/YT 30%</div>
+    <div class="stage-body">
+      <strong>Goal:</strong> Awareness + scroll stops. Don't sell — educate and provoke.<br>
+      <strong>Message:</strong> "Did you know your egg count peaks at 25 and drops 50% by 32? Most women find out too late."<br>
+      <strong>Formats:</strong> Reels (15–30s), educational carousels, doctor-led explainers, UGC "I got my fertility tested" content<br>
+      <strong>KPI:</strong> CPM under ₹80, Hook rate &gt;30%, Video ThruPlay &gt;15%
+    </div>
+    <div class="tag-row">
+      <span class="badge badge-blue">Reels</span>
+      <span class="badge badge-blue">Dr. Content</span>
+      <span class="badge badge-blue">UGC</span>
+      <span class="badge badge-blue">Interest targeting</span>
+    </div>
+  </div>
+
+  <div class="funnel-stage mof">
+    <div class="stage-label">MOF — Consideration | Budget: 30% | Platform: Meta 60%, Google Search 40%</div>
+    <div class="stage-body">
+      <strong>Goal:</strong> Move from "interesting" to "this is for me." Eliminate objections. Build trust.<br>
+      <strong>Message:</strong> "6,000+ women have tested with Arva. Here's what Priya (32, Bengaluru) found out — and what she did next."<br>
+      <strong>Formats:</strong> Long-form video testimonials, before/after result stories, doctor explainer on AMH meaning, FAQ carousel<br>
+      <strong>Retarget:</strong> Video viewers (50%+), website visitors (no purchase), quiz starters (did not complete)<br>
+      <strong>KPI:</strong> CTR &gt;1.5%, ATC rate &gt;8%, CPC under ₹25
+    </div>
+    <div class="tag-row">
+      <span class="badge badge-teal">Testimonials</span>
+      <span class="badge badge-teal">Retargeting</span>
+      <span class="badge badge-teal">LAL audiences</span>
+      <span class="badge badge-teal">Search intent</span>
+    </div>
+  </div>
+
+  <div class="funnel-stage bof">
+    <div class="stage-label">BOF — Conversion + Retargeting | Budget: 30% | Platform: Meta 50%, Google 50%</div>
+    <div class="stage-body">
+      <strong>Goal:</strong> Remove the last 3 objections: price, trust, "I'll do it later."<br>
+      <strong>Message:</strong> "WELCOME10 — 10% off today. Your results in 72 hours. Phlebotomist comes to you."<br>
+      <strong>Formats:</strong> Dynamic product ads, urgency-based static, trust-stacked creatives (lab partner logos: Tata 1mg, Redcliffe, Thyrocare), Google Brand + Non-brand Search<br>
+      <strong>Retarget:</strong> ATC abandoners (within 3 days), product page visitors (7 days), consultation page viewers<br>
+      <strong>KPI:</strong> ROAS &gt;2.5x, CPA under ₹1,800 (test kit), Conversion rate &gt;2.5%
+    </div>
+    <div class="tag-row">
+      <span class="badge badge-pink">DPA</span>
+      <span class="badge badge-pink">ATC retarget</span>
+      <span class="badge badge-pink">Brand search</span>
+      <span class="badge badge-pink">Urgency creative</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Budget Allocation — ₹7L/month baseline</div>
+    <div class="budget-bar">
+      <div style="width:40%;background:#378ADD;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff">TOF 40% — ₹2.8L</div>
+      <div style="width:30%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff">MOF 30% — ₹2.1L</div>
+      <div style="width:30%;background:#D4537E;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff">BOF 30% — ₹2.1L</div>
+    </div>
+    <div class="card-body" style="font-size:13px">Meta total: ~₹4.5L | Google total: ~₹2.5L | Meta is primary demand gen engine; Google captures what Meta creates.</div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">Meta Ads Strategy — Deep Dive</span>
+  </div>
+
+  <div class="card"><div class="card-title">3a. Creative Strategy — Ad Angles</div></div>
+
+  <div class="angle-card"><span class="angle-num">01</span><strong>Fear/clock:</strong> "Your egg count dropped 30% in the last 2 years. You didn't notice. That's the problem." → Static/carousel. High CTR cold.</div>
+  <div class="angle-card"><span class="angle-num">02</span><strong>Dismissal anger:</strong> "My doctor said I was too young to worry. My AMH said otherwise." → UGC-style testimonial. High engagement.</div>
+  <div class="angle-card"><span class="angle-num">03</span><strong>Curiosity:</strong> "I spent ₹5,650 to find out I had more time than I thought. Worth every rupee." → Reel hook. Drives clicks from unaware audience.</div>
+  <div class="angle-card"><span class="angle-num">04</span><strong>Normalization:</strong> "50,000 women have already done this. Why haven't you?" → Social proof. Works in MOF retargeting.</div>
+  <div class="angle-card"><span class="angle-num">05</span><strong>Doctor-led authority:</strong> Dr. Lavanya Kiran explains AMH in 60 seconds. No selling. Pure education. → Builds trust at TOF, re-used in MOF.</div>
+  <div class="angle-card"><span class="angle-num">06</span><strong>Aspiration:</strong> "I got tested at 29. Froze my eggs at 30. Started IVF at 35. Best decision I ever made." → Narrative arc. Long-form video for MOF.</div>
+  <div class="angle-card"><span class="angle-num">07</span><strong>Convenience:</strong> "A phlebotomist comes to your home. Your results in 72 hours. No clinic, no waiting room." → Objection removal. Works in BOF.</div>
+  <div class="angle-card"><span class="angle-num">08</span><strong>PCOS angle:</strong> "PCOS doesn't mean you can't have kids. But it does mean you need to know your numbers." → Specific problem-aware segment. Very targeted.</div>
+  <div class="angle-card"><span class="angle-num">09</span><strong>Career-family tension:</strong> "You built your career. You didn't 'forget' to have kids. You chose timing. Now make it count." → Resonates with 28–33, corporate women.</div>
+  <div class="angle-card"><span class="angle-num">10</span><strong>Price anchoring:</strong> "₹5,650 for answers that could change your entire family planning. One dinner out costs more." → BOF conversion. Frames price as cheap.</div>
+  <div class="angle-card"><span class="angle-num">11</span><strong>Before/after data:</strong> "My AMH was 1.2 ng/mL. My doctor explained what that meant. I finally had a plan." → Data-driven, appeals to optimizers.</div>
+  <div class="angle-card"><span class="angle-num">12</span><strong>Gift angle:</strong> "Give your sister the test she won't buy herself." → New acquisition channel. Works around birthdays/women's health awareness months.</div>
+
+  <div class="highlight">Hook format rule: First 3 seconds must create either tension, curiosity, or recognition. "Have you ever wondered about your fertility?" is a dead hook. "Your egg count is declining right now. Here's how to check it at home." is a working hook.</div>
+
+  <div class="card" style="margin-top:.75rem">
+    <div class="card-title">Creative Mix Recommendation</div>
+    <div class="card-body">
+      <strong>40%</strong> UGC-style (founder/real customer, raw, handheld) — highest CTR in healthcare<br>
+      <strong>30%</strong> Doctor-led explainers (Dr. Lavanya short-form) — highest trust signal<br>
+      <strong>20%</strong> Designed static/carousels (data-heavy, stat-led) — best for retargeting<br>
+      <strong>10%</strong> Testimonial compilations — social proof for MOF
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:.75rem">
+    <div class="card-title">3b. Testing Framework</div>
+    <div class="card-body">
+      <strong>Week 1–2 (Launch):</strong> Test 3 angles × 2 hooks × 2 formats = 12 ad variants per campaign. Keep audience constant, vary creative only.<br><br>
+      <strong>Decision rule:</strong> At ₹1,500 spend per ad, cut anything with hook rate &lt;20% or CTR &lt;0.8%. At ₹3,000 spend, cut anything with CPA &gt;2.5× target. Keep 2–3 winners.<br><br>
+      <strong>Week 3–4 (Iterate):</strong> Take winning angle, test new hooks and new formats. Introduce winning creative to new audiences.<br><br>
+      <strong>Ongoing (Monthly):</strong> Creative fatigue hits when frequency exceeds 2.5 for cold or 4.0 for warm. Refresh accordingly. Never let a campaign run on the same creative past 6 weeks cold, 3 weeks warm.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:.75rem">
+    <div class="card-title">3c. Scaling Strategy</div>
+    <div class="card-body">
+      <strong>Horizontal scaling first:</strong> New audiences (new interest stacks, lookalikes from different seed audiences, new geo expansions) before raising budgets.<br><br>
+      <strong>Budget increase rule:</strong> Raise budget max 20% every 48–72 hours on a winning ad set. Doubling kills learning phase and resets algorithms.<br><br>
+      <strong>CBO vs ABO:</strong> Run CBO at scale with 5–6 proven audiences. Keep ABO only for testing new creatives with budget caps.<br><br>
+      <strong>Scaling ceiling signal:</strong> CPA increases &gt;40% from baseline on same creative → stop scaling, add new creative first.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">Google Ads Strategy</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">4a. Search Keyword Clusters</div>
+      <div class="card-body">
+        <strong>High-intent (BOF):</strong><br>
+        "fertility test at home india", "amh test home kit", "check egg reserve at home", "fertility blood test cost india", "arva health fertility test"<br><br>
+        <strong>Problem-aware (MOF):</strong><br>
+        "how to know if i can get pregnant", "amh levels by age india", "low amh treatment india", "pcos affect fertility", "fertility check for women 30"<br><br>
+        <strong>Education (TOF):</strong><br>
+        "what is ovarian reserve", "egg freezing cost india", "fertility age chart women", "when to get fertility tested"<br><br>
+        <strong>Brand (BOF):</strong><br>
+        "arva health", "arva fertility test", "arva health review" — bid always, no exceptions
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Bidding & Structure</div>
+      <div class="card-body">
+        <strong>Brand campaign:</strong> Max clicks / Manual CPC ₹15–25. Never let competitors steal branded traffic.<br><br>
+        <strong>High-intent non-brand:</strong> Target CPA bidding after 30+ conversions. Starting with Maximize Conversions capped at ₹2,000 CPA.<br><br>
+        <strong>Negative keywords:</strong> Block "free", "DIY", "government", "AIIMS", "insurance" — these are high-volume, zero-intent clicks that drain budget fast.<br><br>
+        <strong>Match types:</strong> Phrase + Exact for non-brand. Broad only for brand (with tight negative list). Avoid broad for non-brand until ROAS is stable.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">4b. YouTube / Display</div>
+    <div class="card-body">
+      <strong>YouTube (TOF only):</strong> 60-second non-skippable with Dr. Lavanya explaining "the one test every woman should take before 35." Target: In-market for fertility health, custom intent audiences (searched AMH, PCOS, fertility). Budget: ₹30K/month. Goal is brand familiarity, not direct conversions — measure view-through attribution.<br><br>
+      <strong>Display (Retargeting only):</strong> Standard banner + responsive display for website visitors &gt;30 days who haven't converted. Keep frequency cap at 3/week. Message: "Still thinking about it? Your results in 72 hours." Do NOT run display for cold traffic — waste of budget at this scale.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">Landing Page Optimization</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Current Issues (Observed)</div>
+      <div class="card-body">
+        — Hero section doesn't immediately answer "why now?"<br>
+        — Price (₹5,650) shown without anchoring — feels expensive in isolation<br>
+        — No urgency mechanism above the fold<br>
+        — "WELCOME10" discount buried — should be prominently surfaced<br>
+        — Social proof (6,000 women) is present but visually weak<br>
+        — No trust-building on "who analyzes your blood?" — labs mentioned below fold only<br>
+        — CTA "Add to Cart" feels transactional for an anxiety-laden purchase
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">CRO Changes to Make</div>
+      <div class="card-body">
+        <strong>1.</strong> New hero headline: "Know your fertility in 72 hours. No clinic. Just clarity." — specific, benefit-led<br>
+        <strong>2.</strong> Add "₹5,650 vs ₹18,000 at a clinic" price anchor above CTA<br>
+        <strong>3.</strong> Move lab logos (Tata 1mg, Thyrocare) above the fold — most important trust signal<br>
+        <strong>4.</strong> Replace "Add to Cart" with "Get My Fertility Report" — emotional, outcome-based CTA<br>
+        <strong>5.</strong> Add sticky buy bar on mobile — users scroll past CTA on mobile constantly<br>
+        <strong>6.</strong> Add 2–3 short video testimonials (30 seconds max) after product description<br>
+        <strong>7.</strong> Add FAQ section targeting the 3 real objections: "Is my data safe?", "Is blood draw painful?", "What do I do with the results?"<br>
+        <strong>8.</strong> Add doctor credential block just before final CTA — "Results reviewed and explained by certified fertility coaches"
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">Healthcare CRO rule: Every element on the page either builds trust or creates urgency. Decorative elements are friction. Remove anything that doesn't do one of those two things.</div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">Experiments & Growth Hacks</span>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 01</div>
+    <div class="exp-title">Fertility Score Quiz Funnel</div>
+    <div class="card-body" style="font-size:14px">Build a 6-question quiz: age, cycle regularity, PCOS diagnosis, trying to conceive duration, stress levels, family history. Give a "Fertility Risk Score" at the end (Low / Medium / High). Gate the detailed interpretation behind email + phone capture. Follow up with personalized email nurture + retarget based on score.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Quiz completion leads to 3× higher purchase intent than direct landing page</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Typeform or Outgrow quiz → custom results page → email sequence over 5 days</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>30–40% email capture rate, 15–20% of captured leads convert to purchase within 14 days</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 02</div>
+    <div class="exp-title">Free AMH Interpretation Lead Magnet</div>
+    <div class="card-body" style="font-size:14px">"Had your AMH tested elsewhere? Upload your report and get a free interpretation from our fertility coach." Target women who already tested at government hospitals or Apollo/Fortis labs but got no guidance. Capture them, nurture into complete fertility test or consultation purchase.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Existing test-havers are high-intent but lost — this reactivates them</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Meta lead ad + Google form + WhatsApp coach follow-up within 24h</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>₹300–400 CPL, 25% upsell to consultation within 30 days</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 03</div>
+    <div class="exp-title">WhatsApp Retargeting Sequence</div>
+    <div class="card-body" style="font-size:14px">Capture phone number at quiz/lead magnet stage. Enroll in a 5-message WhatsApp sequence over 7 days: Day 1 — score results, Day 2 — what your AMH means, Day 3 — customer story, Day 5 — limited-time offer, Day 7 — "last chance" nudge. WhatsApp open rates are 80%+ vs email at 22%.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>WhatsApp nurture converts 2× better than email for Indian users</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>WATI or Interakt + Meta CAPI for attribution</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>18–25% conversion from WhatsApp nurture vs 8–12% from email</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 04</div>
+    <div class="exp-title">Pricing Psychology Test — Bundle vs Standalone</div>
+    <div class="card-body" style="font-size:14px">Test 3 price presentations: (A) ₹5,650 alone, (B) ₹5,650 + consultation at ₹6,150 shown as "most popular", (C) ₹2,200 AMH-only as entry + upsell to complete test in post-purchase flow. The decoy effect (B) should increase average order value by 20–30%.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>A 3-option price table increases AOV by showing relative value</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>A/B test on landing page via Google Optimize or VWO</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>+20% AOV with decoy pricing, flat or +5% conversion rate</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 05</div>
+    <div class="exp-title">Corporate Wellness B2B2C Channel</div>
+    <div class="card-body" style="font-size:14px">Run LinkedIn ads targeting HR leaders and Employee Benefits managers at 500+ employee tech companies (Bangalore, Mumbai, Hyderabad). Pitch Arva as a women's wellness benefit. One B2B deal = 50–200 test kits sold at bulk. Cost per acquisition of 100 kits via one HR email &lt; ₹500 per unit.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>B2B channel unlocks volume with zero consumer CAC</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>LinkedIn lead gen → sales call → custom invoice → employee booking portal</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>2–3 corporate accounts in Month 2–3, ₹5–8L revenue per account annually</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 06</div>
+    <div class="exp-title">Post-Purchase Upsell — Consultation + Egg Freezing</div>
+    <div class="card-body" style="font-size:14px">After test kit purchase confirmation, show an immediate upsell: "Add a 30-min fertility consultation for ₹500 (regular ₹1,000)." Then, 72 hours after results delivery, trigger a personalized email + WhatsApp based on result tier: Low reserve → "Let's talk about your options" → egg freezing CTA. High reserve → "Great news — here's how to stay that way."</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Result anxiety is highest at 72hr mark — best conversion window for high-ticket</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Post-purchase Shopify upsell page + automated CRM trigger</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>30–35% upsell attach rate on consultation, 8–12% of consultations convert to egg freezing/IVF inquiry</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 07</div>
+    <div class="exp-title">Influencer-Led UGC Program (Micro > Macro)</div>
+    <div class="card-body" style="font-size:14px">Partner with 15–20 micro-influencers (20K–150K followers) in health, women's wellness, PCOS niches. Give them the kit for free. No script — authentic "I got my results" content. Performance-pay them (₹5K base + ₹500/verified sale). This content becomes paid UGC ads after whitelisting. ROAS on whitelisted UGC is typically 30–50% higher than branded content.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Micro-UGC at scale outperforms branded ads for healthcare trust</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Brief via email, whitelist via Meta partnership, run as dark posts</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>CPA 25–35% lower than branded creative within 3 weeks of testing</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 08</div>
+    <div class="exp-title">Remarketing Audience Segmentation by Intent Signal</div>
+    <div class="card-body" style="font-size:14px">Don't retarget all website visitors with the same ad. Segment: (A) Product page only → interest ad, (B) ATC no purchase → urgency + discount ad, (C) Blog readers → education → product bridge ad, (D) Consultation page → high-ticket egg freezing creative. Custom message for each segment increases relevance score and cuts wasted spend by 20–30%.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Segmented retargeting reduces CAC by 25% vs blanket retargeting</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Meta custom audiences + URL-based pixel events + 4 separate ad sets</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>Retargeting ROAS improves from 3x to 4.5–5x</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 09</div>
+    <div class="exp-title">"Freeze Your Eggs" Awareness Campaign — Separate Funnel</div>
+    <div class="card-body" style="font-size:14px">Egg freezing is ₹1.5–2L — it needs its own dedicated funnel. Run a separate TOF campaign targeting 28–34 women, building egg freezing as an aspirational, empowering choice (not a last resort). Funnel: Awareness video → consultation booking → clinic visit → procedure. Don't mix this with the test kit funnel — different CAC, LTV, and sales cycle entirely.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>Egg freezing messaging fails when bundled with affordable test kit messaging</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Separate campaign, separate landing page, dedicated consultation CTA</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>10–15 qualified consultation bookings/month at ₹1,500–2,000 CPL</div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 10</div>
+    <div class="exp-title">3-Day Abandoned Cart WhatsApp + Email Sequence</div>
+    <div class="card-body" style="font-size:14px">ATC abandonment rate in healthcare D2C is typically 75–80%. That's your biggest leak. Build: 1hr post-ATC — "Forgot something?" + product reminder. 24hr — "One of our coaches answers your top questions" (FAQ format). 72hr — 10% off code expiry warning. This sequence alone can recover 15–20% of abandoned carts.</div>
+    <div class="exp-row">
+      <div class="exp-col"><div class="exp-col-label">Hypothesis</div>ATC recovery is highest within 72hr window — price or anxiety is the blocker</div>
+      <div class="exp-col"><div class="exp-col-label">Execution</div>Shopify Klaviyo flow + WATI WhatsApp + Meta retargeting in parallel</div>
+      <div class="exp-col"><div class="exp-col-label">Expected outcome</div>15–20% ATC recovery, ₹400–600 effective CAC on recovered orders</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-title">Metrics & Performance Benchmarks</span>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">0.9–1.6%</div><div class="metric-label">Meta CTR (TOF)</div></div>
+    <div class="metric"><div class="metric-val">₹18–28</div><div class="metric-label">CPC (Non-brand Search)</div></div>
+    <div class="metric"><div class="metric-val">₹1,400–1,900</div><div class="metric-label">CPA (Test Kit)</div></div>
+    <div class="metric"><div class="metric-val">2.5–3.5×</div><div class="metric-label">Target ROAS</div></div>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">1.8–2.5%</div><div class="metric-label">LP Conversion Rate</div></div>
+    <div class="metric"><div class="metric-val">₹60–90</div><div class="metric-label">CPM (Metro Targeting)</div></div>
+    <div class="metric"><div class="metric-val">₹8,000–15,000</div><div class="metric-label">LTV (Test → Consult → IVF)</div></div>
+    <div class="metric"><div class="metric-val">4.5–5.5×</div><div class="metric-label">Retargeting ROAS</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">LTV vs CAC Logic</div>
+    <div class="card-body">
+      Test kit buyer (₹5,650) → 35% book consultation (₹500–1,000) → 12% of those explore egg freezing (₹1.5–2L) → 5% proceed to IVF (₹2–4L).<br><br>
+      Blended LTV over 18 months: <strong>₹8,000–₹12,000</strong> including downstream services.<br>
+      If CAC for test kit is ₹1,600 → LTV:CAC = ~5–7× at maturity. This is an extremely healthy unit economics story — the test kit is essentially a loss-leader customer acquisition tool for high-ticket services.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-title">Biggest Problems & How I Solve Them</span>
+  </div>
+
+  <div class="problem"><strong>Problem 1: Trust deficit.</strong> Healthcare D2C in India is still earning trust. Women are sending blood — this is not a ₹299 supplement impulse buy.</div>
+  <div class="solution"><strong>Solution:</strong> Lab partner logos above the fold (Tata 1mg, Thyrocare — brands they trust). NABL certification prominently displayed. Doctor advisory board photos and credentials — not stock imagery. "Used by 6,000+ women" with city tags (Bengaluru, Mumbai, etc). Third-party press mentions (Financial Express, Mint) in hero section.</div>
+
+  <div class="problem"><strong>Problem 2: High CAC on cold traffic.</strong> Cost to acquire via cold Meta can spike to ₹2,500–4,000 without optimized creative + landing page alignment.</div>
+  <div class="solution"><strong>Solution:</strong> Lead with the ₹2,200 AMH-only test as TOF acquisition product. Lower price = lower psychological barrier = lower CAC. Then upsell to complete kit via email/WhatsApp. Split-funnel: ₹2,200 entry → ₹5,650 upsell within 14 days.</div>
+
+  <div class="problem"><strong>Problem 3: Low category awareness.</strong> Most women don't know they can check their fertility at home. They search symptoms, not solutions.</div>
+  <div class="solution"><strong>Solution:</strong> Symptom-led Google keywords — PCOS + fertility, irregular cycle fertility check, how to know egg count. Intercept at the symptom, educate toward the solution. TOF Meta content should be educational first, product second. Build authority via blog SEO that drives organic demand over 6 months.</div>
+
+  <div class="problem"><strong>Problem 4: Long conversion cycle.</strong> Fertility decisions are emotional and take time. A cold visitor rarely converts in one session.</div>
+  <div class="solution"><strong>Solution:</strong> Capture email + phone at quiz/lead magnet stage. Build a 14-day nurture sequence. Use WhatsApp for mid-funnel engagement (80% open rate). Retarget video viewers at 7, 14, 30 days with different messages. Accept that AOV decisions require 3–7 touchpoints — design the journey, not just the first click.</div>
+
+  <div class="problem"><strong>Problem 5: PMAX/Broad match budget erosion on Google.</strong> Google's automated bidding often burns budget on irrelevant health searches without tight controls.</div>
+  <div class="solution"><strong>Solution:</strong> No Performance Max campaigns until spend is ₹3L+/month and conversion data is rich (&gt;100/month). Start with manual Exact + Phrase only. Review Search Terms Report weekly. Build a negative keyword list of 150+ terms before launching. Set demographic exclusions (men, under 22, over 45).</div>
+</div>
+
+<!-- SECTION 9 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <span class="section-title">Results — Hypothetical but Realistic</span>
+  </div>
+
+  <div class="before-after">
+    <div class="before">
+      <div class="ba-label">Before (Month 0 Baseline)</div>
+      <div class="ba-item">CPA: ₹2,800–3,500 (estimated, no optimization)</div>
+      <div class="ba-item">ROAS: 1.5–1.8×</div>
+      <div class="ba-item">LP Conversion Rate: ~1.1%</div>
+      <div class="ba-item">Meta CTR: 0.5–0.7%</div>
+      <div class="ba-item">ATC Abandonment: ~82%</div>
+      <div class="ba-item">Retargeting ROAS: 2.0–2.5×</div>
+      <div class="ba-item">Monthly orders (₹7L budget): ~200–250</div>
+      <div class="ba-item">Egg freezing inquiries/month: 3–5</div>
+    </div>
+    <div class="after">
+      <div class="ba-label">After (Month 4 — Optimized)</div>
+      <div class="ba-item">CPA: ₹1,400–1,700 — <strong>↓ 45–50%</strong></div>
+      <div class="ba-item">ROAS: 3.0–3.8× — <strong>↑ 100–110%</strong></div>
+      <div class="ba-item">LP Conversion Rate: 2.5–3.2% — <strong>↑ 130%</strong></div>
+      <div class="ba-item">Meta CTR: 1.2–1.8% — <strong>↑ 120–150%</strong></div>
+      <div class="ba-item">ATC Abandonment: ~62% — <strong>↓ 20 pts</strong></div>
+      <div class="ba-item">Retargeting ROAS: 4.5–5.5× — <strong>↑ 100%</strong></div>
+      <div class="ba-item">Monthly orders: 450–550 — <strong>↑ ~120%</strong></div>
+      <div class="ba-item">Egg freezing inquiries: 18–25/month — <strong>↑ 4–5×</strong></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:.75rem">
+    <div class="card-title">Revenue Impact (Same ₹7L Budget)</div>
+    <div class="card-body">
+      Month 0: ~230 orders × ₹4,500 avg AOV = <strong>₹10.3L revenue</strong> | ROAS 1.5×<br>
+      Month 4: ~500 orders × ₹5,100 avg AOV (upsell working) = <strong>₹25.5L revenue</strong> | ROAS 3.6×<br><br>
+      High-ticket downstream (egg freezing at 20 inquiries × 30% conversion × ₹1.5L): <strong>+₹9L/month in Month 5–6</strong><br><br>
+      <strong>Total revenue impact at 6 months: ~₹35L/month from a ₹7L media investment.</strong>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BONUS -->
+<div class="bonus">
+  <div class="bonus-title">What I'd do differently from most marketers on this brand</div>
+
+  <div class="bonus-item">Most marketers would go direct to purchase from TOF. I'd build a quiz funnel first — email capture before ad spend scales. A 30% email capture rate on cold traffic is worth more than a 1.5% direct conversion rate.</div>
+
+  <div class="bonus-item">Most would run one fertility test campaign. I'd run three separate funnels: AMH entry test (₹2,200 price sensitive), complete test (₹5,650 planners), egg freezing (₹1.5L aspirational). Different audience, message, and creative for each. Mixing them kills conversion for all three.</div>
+
+  <div class="bonus-item">Most would measure ROAS per campaign. I'd measure LTV:CAC over 6 months. The test kit is a ₹5,650 product with a potential ₹1.5L downstream value. A campaign with 2× ROAS on kit sales might have a 15× ROAS when you count egg freezing conversions 60 days later.</div>
+
+  <div class="bonus-item">Most would trust Meta's algorithm on audience targeting. I'd layer manual constraints: only women, Tier-1 cities, minimum household income ₹8L+ (proxy via premium device + interest stack). Bad audiences don't just waste spend — they fill your CRM with people who will never buy high-ticket services.</div>
+
+  <div class="bonus-item">Most would ignore WhatsApp. I'd make it the primary post-lead channel. India's purchase decisions for healthcare happen on WhatsApp — between the woman, her partner, and sometimes her mother. A well-designed WhatsApp sequence converts at 2× email in this category. Don't fight user behavior; design for it.</div>
+
+  <div class="bonus-item">Most would treat the ₹500 consultation product as a low-value SKU. I'd treat it as the highest-ROI customer in the entire funnel — someone willing to pay for advice is one conversation away from spending ₹1.5L on egg freezing. I'd assign a dedicated human coach (not a bot) to every consultation lead and track their 90-day downstream revenue personally.</div>
+
+  <div class="bonus-item">Most would benchmark against industry averages. I'd benchmark against my own previous week. In a brand at this scale and stage, the only meaningful comparison is whether I'm better than I was 7 days ago. External benchmarks are vanity — your own learning curve is the only number that matters.</div>
+</div>
+
+</div>
